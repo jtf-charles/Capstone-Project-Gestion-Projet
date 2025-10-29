@@ -34,6 +34,8 @@ ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://heartfelt-conkies-1d352d.netlify.app",
+    "https://gestionprojet-app.onrender.com",
 ]
 
 # --- AJOUT MINIMAL : normaliser le préfixe d'URL pour éviter "C:/Program Files/Git/media" ---
