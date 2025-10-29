@@ -1,6 +1,6 @@
 // API client pour Evenement — chemins et sérialisation alignés sur le backend
 
-const API = import.meta.env.VITE_API_BASE ?? "";
+const API ="https://gestionprojet-api.onrender.com";
 
 // — types
 export type Nullable<T> = T | null;

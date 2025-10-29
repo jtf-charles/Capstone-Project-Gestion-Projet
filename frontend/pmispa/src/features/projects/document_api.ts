@@ -1,5 +1,5 @@
 // src/features/projects/document_api.ts
-const API_BASE = import.meta.env.VITE_API_BASE ?? "";
+const API_BASE ="https://gestionprojet-api.onrender.com";
 
 export type DocumentRow = {
   iddocument: number;

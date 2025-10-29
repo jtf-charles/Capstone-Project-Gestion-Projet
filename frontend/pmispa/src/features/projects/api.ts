@@ -2,7 +2,7 @@
 // ==> IMPORTANT : import relatif (pas d’alias @)
 import { apiFetch } from "../../lib/api";
 
-const BASE = "/api/v1/projets";
+const BASE = "https://gestionprojet-api.onrender.com/api/v1/projets";
 
 /* ---------- Types ---------- */
 export type Project = {
@@ -62,7 +62,7 @@ export type SuiviRow = {
 
 
 export async function fetchActiviteSuivi(activiteId: number | string, token?: string) {
-  return apiFetch<SuiviRow[]>(`/api/v1/projets/activites/${activiteId}/suivi`, { token });
+  return apiFetch<SuiviRow[]>(`https://gestionprojet-api.onrender.com/api/v1/projets/activites/${activiteId}/suivi`, { token });
 }
 
 
@@ -80,7 +80,7 @@ export interface PersonnelRow {
 }
 
 export async function fetchProjectPersonnels(idprojet: number, token: string): Promise<PersonnelRow[]> {
-  const res = await fetch(`/api/v1/projets/${idprojet}/personnels`, {
+  const res = await fetch(`https://gestionprojet-api.onrender.com/api/v1/projets/${idprojet}/personnels`, {
     headers: { Authorization: `Bearer ${token}` }
   });
   if (!res.ok) throw new Error("Erreur chargement personnels");
@@ -144,7 +144,7 @@ export async function fetchCommandeSoumissionnaires(
   token?: string
 ): Promise<SoumissionnaireRow[]> {
   const r = await fetch(
-    `/api/v1/projets/commandes/${commandeId}/soumissionnaires`,
+    `https://gestionprojet-api.onrender.com/api/v1/projets/commandes/${commandeId}/soumissionnaires`,
     { headers: token ? { Authorization: `Bearer ${token}` } : {} }
   );
   if (!r.ok) throw new Error(await r.text());
@@ -169,7 +169,7 @@ export async function fetchCommandeTitulaires(
   token?: string
 ): Promise<TitulaireRow[]> {
   const res = await fetch(
-    `/api/v1/projets/commandes/${commandeId}/titulaires`,
+    `https://gestionprojet-api.onrender.com/api/v1/projets/commandes/${commandeId}/titulaires`,
     { headers: token ? { Authorization: `Bearer ${token}` } : undefined }
   );
   if (!res.ok) throw new Error("Erreur de chargement des titulaires");
@@ -196,7 +196,7 @@ export async function fetchActiviteResponsables(
   activiteId: number,
   token?: string
 ): Promise<ResponsableRow[]> {
-  const res = await fetch(`/api/v1/projets/activites/${activiteId}/responsables`, {
+  const res = await fetch(`https://gestionprojet-api.onrender.com/api/v1/projets/activites/${activiteId}/responsables`, {
     headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
   });
   if (!res.ok) throw new Error("Erreur serveur lors du chargement des responsabilités");
@@ -212,7 +212,7 @@ export type Exercice = {
 
 // ---- fetch
 export async function fetchActiviteExercices(activiteId: number, token?: string) {
-  const res = await fetch(`/api/v1/projets/activites/${activiteId}/exercices`, {
+  const res = await fetch(`https://gestionprojet-api.onrender.com/api/v1/projets/activites/${activiteId}/exercices`, {
     headers: token ? { Authorization: `Bearer ${token}` } : undefined,
   });
   if (!res.ok) throw new Error("Erreur chargement exercices fiscaux");
@@ -226,7 +226,7 @@ export async function fetchActiviteImplantations(
   token?: string
 ) {
   return apiFetch<Implantation[]>(
-    `/api/v1/projets/activites/${activiteId}/implantations`,
+    `https://gestionprojet-api.onrender.com/api/v1/projets/activites/${activiteId}/implantations`,
     { token }
   );
 }
@@ -296,8 +296,8 @@ async function tryFetch<T>(url: string, token?: string): Promise<T | null> {
 
 export async function fetchProjectSites(projectId: number | string, token?: string) {
   const candidates = [
-    `/api/v1/sites?project_id=${projectId}`,
-    `/api/v1/sites?projet_id=${projectId}`,
+    `https://gestionprojet-api.onrender.com/api/v1/sites?project_id=${projectId}`,
+    `https://gestionprojet-api.onrender.com/api/v1/sites?projet_id=${projectId}`,
   ];
   for (const url of candidates) {
     const res = await tryFetch<Site[]>(url, token);
@@ -308,8 +308,8 @@ export async function fetchProjectSites(projectId: number | string, token?: stri
 
 export async function listProjectActivites(projectId: number | string, token?: string) {
   const candidates = [
-    `/api/v1/activites?project_id=${projectId}`,
-    `/api/v1/activites?projet_id=${projectId}`,
+    `https://gestionprojet-api.onrender.com/api/v1/activites?project_id=${projectId}`,
+    `https://gestionprojet-api.onrender.com/api/v1/activites?projet_id=${projectId}`,
   ];
   for (const url of candidates) {
     const res = await tryFetch<Activite[]>(url, token);
@@ -320,8 +320,8 @@ export async function listProjectActivites(projectId: number | string, token?: s
 
 export async function fetchProjectEvenements(projectId: number | string, token?: string) {
   const candidates = [
-    `/api/v1/evenements?project_id=${projectId}`,
-    `/api/v1/evenements?projet_id=${projectId}`,
+    `https://gestionprojet-api.onrender.com/api/v1/evenements?project_id=${projectId}`,
+    `https://gestionprojet-api.onrender.com/api/v1/evenements?projet_id=${projectId}`,
   ];
   for (const url of candidates) {
     const res = await tryFetch<Evenement[]>(url, token);
@@ -342,7 +342,7 @@ export async function listProjectsLite(token: string): Promise<ProjectLite[]> {
   const out: ProjectLite[] = [];
 
   while (true) {
-    const res = await fetch(`/api/v1/projets?skip=${skip}&limit=${pageSize}`, {
+    const res = await fetch(`https://gestionprojet-api.onrender.com/api/v1/projets?skip=${skip}&limit=${pageSize}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     if (!res.ok) {
@@ -378,7 +378,7 @@ export type EventRow = {
 
 // GET /api/v1/projets/activites/{id}/evenements
 export async function fetchActiviteEvenements(activiteId: number, token?: string): Promise<EventRow[]> {
-  const res = await fetch(`/api/v1/projets/activites/${activiteId}/evenements`, {
+  const res = await fetch(`https://gestionprojet-api.onrender.com/api/v1/projets/activites/${activiteId}/evenements`, {
     headers: token ? { Authorization: `Bearer ${token}` } : undefined,
   });
   if (!res.ok) {
@@ -397,7 +397,7 @@ export async function fetchProjetEvenements(
   projectId: number,
   token?: string | null
 ): Promise<EventRow[]> {
-  const base = import.meta.env.VITE_API_BASE ?? "";
+  const base ="https://gestionprojet-api.onrender.com";
   const res = await fetch(`${base}/api/v1/projets/${projectId}/evenements`, {
     headers: token ? { Authorization: `Bearer ${token}` } : {},
   });
@@ -419,7 +419,7 @@ export type DocRow = {
 };
 
 export async function fetchEventDocuments(eid: number, token?: string): Promise<DocRow[]> {
-  const res = await fetch(`/api/v1/evenements/${eid}/documents`, {
+  const res = await fetch(`https://gestionprojet-api.onrender.com/api/v1/evenements/${eid}/documents`, {
     headers: token ? { Authorization: `Bearer ${token}` } : undefined,
   });
   if (!res.ok) throw new Error("Erreur de chargement des documents");
@@ -460,7 +460,7 @@ export async function fetchPersonnelEvenements(
   idpersonnel: number,
   token?: string
 ): Promise<EventRow[]> {
-  const res = await fetch(`/api/v1/personnels/${idpersonnel}/evenements`, {
+  const res = await fetch(`https://gestionprojet-api.onrender.com/api/v1/personnels/${idpersonnel}/evenements`, {
     headers: token ? { Authorization: `Bearer ${token}` } : {},
   });
   if (!res.ok) throw new Error("Erreur de chargement des événements");
@@ -473,7 +473,7 @@ export async function fetchProjectPersonnelsLite(
   projectId: number | string,
   token?: string
 ) {
-  return apiFetch<PersonnelLite[]>(`/api/v1/evenements/${projectId}/personnels`, { token });
+  return apiFetch<PersonnelLite[]>(`https://gestionprojet-api.onrender.com/api/v1/evenements/${projectId}/personnels`, { token });
 }
 
 
@@ -490,12 +490,12 @@ export type CommandeLite = {
 
 // Liste des commandes d’un projet
 export async function fetchProjectCommandesLite(projectId: number | string, token?: string) {
-  return apiFetch<CommandeLite[]>(`/api/v1/evenements/${projectId}/commandes`, { token });
+  return apiFetch<CommandeLite[]>(`https://gestionprojet-api.onrender.com/api/v1/evenements/${projectId}/commandes`, { token });
 }
 
 // Evénements par commande
 export async function fetchCommandeEvenements(idcommande: number, token?: string) {
-  return apiFetch<EventRow[]>(`/api/v1/commandes/${idcommande}/evenements`, { token });
+  return apiFetch<EventRow[]>(`https://gestionprojet-api.onrender.com/api/v1/commandes/${idcommande}/evenements`, { token });
 }
 
 
@@ -508,11 +508,11 @@ export type SoumLite = {
 };
 
 export async function fetchProjectSoumissionnairesLite(projectId: number | string, token?: string) {
-  return apiFetch<SoumLite[]>(`/api/v1/evenements/${projectId}/soumissionnaires`, { token });
+  return apiFetch<SoumLite[]>(`https://gestionprojet-api.onrender.com/api/v1/evenements/${projectId}/soumissionnaires`, { token });
 }
 
 export async function fetchSoumissionnaireEvenements(idsoumissionnaire: number, token?: string) {
-  return apiFetch<EventRow[]>(`/api/v1/soumissionnaires/${idsoumissionnaire}/evenements`, { token });
+  return apiFetch<EventRow[]>(`https://gestionprojet-api.onrender.com/api/v1/soumissionnaires/${idsoumissionnaire}/evenements`, { token });
 }
 
 
@@ -540,7 +540,7 @@ export async function fetchTransactionEvenements(
   token?: string
 ): Promise<EventRow[]> {
   return apiFetch<EventRow[]>(
-    `/api/v1/transactions/${idtransaction}/evenements`,
+    `https://gestionprojet-api.onrender.com/api/v1/transactions/${idtransaction}/evenements`,
     { token }
   );
 }
@@ -598,7 +598,7 @@ export function authHeaders(token?: string): Record<string, string> {
 export type ProjectLite1 = { idprojet: number; code_projet: string; intitule_projet?: string | null };
 
 export async function fetchProjectsLite(token?: string): Promise<ProjectLite1[]> {
-  const res = await fetch(`/api/v1/projets?skip=0&limit=100`, {
+  const res = await fetch(`https://gestionprojet-api.onrender.com/api/v1/projets?skip=0&limit=100`, {
     headers: { ...authHeaders(token) },
   });
   if (!res.ok) throw new Error("Erreur de chargement des projets");
@@ -616,7 +616,7 @@ export async function fetchProjectTransactions(
   scope: Scope,
   token?: string
 ): Promise<TransactionRow[]> {
-  const url = `/api/v1/projets/${projectId}/transactions?scope=${scope}`;
+  const url = `https://gestionprojet-api.onrender.com/api/v1/projets/${projectId}/transactions?scope=${scope}`;
   const res = await fetch(url, { headers: { ...authHeaders(token) } });
   if (!res.ok) throw new Error("Erreur de chargement des transactions");
   return (await res.json()) as TransactionRow[];
@@ -637,7 +637,7 @@ export type QuickProject = {
 export async function fetchProjectsQuick(token?: string): Promise<QuickProject[]> {
   // 1) si tu as déjà un endpoint qui renvoie tous les projets avec code/id,
   // remplace l’URL ci-dessous par le tien. Sinon on réutilise /projets?skip=0&limit=100
-  const rows = await apiFetch<any[]>(`/api/v1/projets?skip=0&limit=100`, { token });
+  const rows = await apiFetch<any[]>(`https://gestionprojet-api.onrender.com/api/v1/projets?skip=0&limit=100`, { token });
   if (!Array.isArray(rows)) return [];
   return rows.map((r) => ({
     idprojet: Number(r.idprojet),

@@ -17,7 +17,7 @@ export type SoumissionInput = {
   date_soumission: string;           // "YYYY-MM-DD"
   statut_soumission?: string | null;
 };
-const API_BASE = import.meta.env.VITE_API_BASE ?? "";
+const API_BASE = "https://gestionprojet-api.onrender.com";
 const SOUM_BASE = `${API_BASE}/api/v1/soumissions`;
 
 async function apiSoumission<T>(path: string, init?: RequestInit): Promise<T> {

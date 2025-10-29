@@ -16,7 +16,7 @@ export type Project = {
 
 export type ProjectInput = Omit<Project, "idprojet">;
 
-const BASE = "/api/v1/projets";
+const BASE = "https://gestionprojet-api.onrender.com/api/v1/projets";
 
 async function fetchJson<T>(input: RequestInfo, init?: RequestInit): Promise<T> {
   const res = await fetch(input, {
@@ -112,19 +112,19 @@ export type ActivityInput = {
 };
 
 export async function listActivities(): Promise<Activity[]> {
-  const r = await fetch(`/api/v1/activites/`, { headers: { accept: "application/json" } });
+  const r = await fetch(`https://gestionprojet-api.onrender.com/api/v1/activites/`, { headers: { accept: "application/json" } });
   if (!r.ok) throw new Error("Erreur de chargement des activités.");
   return r.json();
 }
 
 export async function getActivity(idactivite: number): Promise<Activity> {
-  const r = await fetch(`/api/v1/activites/${idactivite}`, { headers: { accept: "application/json" } });
+  const r = await fetch(`https://gestionprojet-api.onrender.com/api/v1/activites/${idactivite}`, { headers: { accept: "application/json" } });
   if (!r.ok) throw new Error("Activité introuvable.");
   return r.json();
 }
 
 export async function createActivity(input: ActivityInput): Promise<Activity> {
-  const r = await fetch(`/api/v1/activites/`, {
+  const r = await fetch(`https://gestionprojet-api.onrender.com/api/v1/activites/`, {
     method: "POST",
     headers: { "content-type": "application/json", accept: "application/json" },
     body: JSON.stringify(input),
@@ -134,7 +134,7 @@ export async function createActivity(input: ActivityInput): Promise<Activity> {
 }
 
 export async function updateActivity(idactivite: number, input: ActivityInput): Promise<Activity> {
-  const r = await fetch(`/api/v1/activites/${idactivite}`, {
+  const r = await fetch(`https://gestionprojet-api.onrender.com/api/v1/activites/${idactivite}`, {
     method: "PUT",
     headers: { "content-type": "application/json", accept: "application/json" },
     body: JSON.stringify(input),
@@ -144,7 +144,7 @@ export async function updateActivity(idactivite: number, input: ActivityInput): 
 }
 
 export async function deleteActivity(idactivite: number): Promise<{ deleted: boolean; idactivite: number; reason?: string | null }> {
-  const r = await fetch(`/api/v1/activites/${idactivite}`, {
+  const r = await fetch(`https://gestionprojet-api.onrender.com/api/v1/activites/${idactivite}`, {
     method: "DELETE",
     headers: { accept: "application/json" },
   });
@@ -162,7 +162,6 @@ export async function deleteActivity(idactivite: number): Promise<{ deleted: boo
 
 
 // src/features/indicators/indicators_api.ts
-const API_BASE = import.meta.env.VITE_API_BASE ?? "";
 
 export type Indicateur = {
   idindicateur: number;
@@ -186,17 +185,17 @@ async function j(r: Response) {
 }
 
 export async function listIndicateurs(): Promise<Indicateur[]> {
-  const r = await fetch(`${API_BASE}/api/v1/indicateurs/`);
+  const r = await fetch(`https://gestionprojet-api.onrender.com/api/v1/indicateurs/`);
   return j(r);
 }
 
 export async function getIndicateur(id: number): Promise<Indicateur> {
-  const r = await fetch(`${API_BASE}/api/v1/indicateurs/${id}`);
+  const r = await fetch(`https://gestionprojet-api.onrender.com/api/v1/indicateurs/${id}`);
   return j(r);
 }
 
 export async function createIndicateur(payload: IndicateurInput): Promise<Indicateur> {
-  const r = await fetch(`${API_BASE}/api/v1/indicateurs/`, {
+  const r = await fetch(`https://gestionprojet-api.onrender.com/api/v1/indicateurs/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -208,7 +207,7 @@ export async function updateIndicateur(
   id: number,
   payload: IndicateurInput
 ): Promise<Indicateur> {
-  const r = await fetch(`${API_BASE}/api/v1/indicateurs/${id}`, {
+  const r = await fetch(`https://gestionprojet-api.onrender.com/api/v1/indicateurs/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -219,7 +218,7 @@ export async function updateIndicateur(
 export async function deleteIndicateur(
   id: number
 ): Promise<{ deleted: boolean; idindicateur?: number; reason?: string | null }> {
-  const r = await fetch(`${API_BASE}/api/v1/indicateurs/${id}`, { method: "DELETE" });
+  const r = await fetch(`https://gestionprojet-api.onrender.com/api/v1/indicateurs/${id}`, { method: "DELETE" });
   return j(r);
 }
 
@@ -256,7 +255,7 @@ export type DeleteExerciceResponse = {
 
 // Helpers (si tu les as déjà, réutilise les tiens)
 async function api<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`, {
+  const res = await fetch(`https://gestionprojet-api.onrender.com${path}`, {
     headers: { "Content-Type": "application/json" },
     credentials: "include",
     ...init,
@@ -332,7 +331,7 @@ export type ProgrammationInput = {
   idexercice_budgetaire: number;
 };
 
-const PROG_BASE = `/api/v1/programmations`;
+const PROG_BASE = `https://gestionprojet-api.onrender.com/api/v1/programmations`;
 
 async function apiProg<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, {
@@ -397,7 +396,7 @@ export type Soumission = {
 };
 
 export async function listSoumissions(): Promise<Soumission[]> {
-  const r = await fetch(`${API_BASE}/api/v1/soumissions/`, {
+  const r = await fetch(`https://gestionprojet-api.onrender.com/api/v1/soumissions/`, {
     credentials: "include",
   });
   if (!r.ok) throw new Error(await r.text());
@@ -424,7 +423,7 @@ export type PersonnelInput = {
   type_personnel?: string | null;
 };
 
-const PERSONNEL_BASE = `${API_BASE}/api/v1/personnels`;
+const PERSONNEL_BASE = `https://gestionprojet-api.onrender.com/api/v1/personnels`;
 
 async function apiPersonnel<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, {
@@ -504,7 +503,7 @@ export type ResponsabiliteInput = {
   date_fin_act?: string | null;
 };
 
-const RESP_BASE = `${API_BASE}/api/v1/responsabilites`;
+const RESP_BASE = `https://gestionprojet-api.onrender.com/api/v1/responsabilites`;
 
 async function apiResp<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, {
@@ -589,7 +588,7 @@ export type ContratInput = {
   montant_contrat?: number | null;
 };
 
-const CONTRAT_BASE = `${API_BASE}/api/v1/contrats`;
+const CONTRAT_BASE = `https://gestionprojet-api.onrender.com/api/v1/contrats`;
 
 async function apiContrat<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, {
@@ -657,7 +656,7 @@ export type ProcedureInput = {
   type_procedure: string;
 };
 
-const PROC_BASE = `${API_BASE}/api/v1/procedures`;
+const PROC_BASE = `https://gestionprojet-api.onrender.com/api/v1/procedures`;
 
 async function apiProc<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, {
@@ -741,7 +740,7 @@ export type CommandeInput = {
   type_commande?: string | null;
 };
 
-const COMMANDE_BASE = `${API_BASE}/api/v1/commandes`;
+const COMMANDE_BASE = `https://gestionprojet-api.onrender.com/api/v1/commandes`;
 
 async function apiCommande<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, {
@@ -819,7 +818,7 @@ export type SoumissionnaireInput = {
   email_soum?: string | null;
 };
 
-const SOUMISS_BASE = `${API_BASE}/api/v1/soumissionnaires`;
+const SOUMISS_BASE = `https://gestionprojet-api.onrender.com/api/v1/soumissionnaires`;
 
 async function apiSoum<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, {

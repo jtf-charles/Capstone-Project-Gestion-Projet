@@ -14,7 +14,7 @@ export type ProgrammationInput = {
   idexercice_budgetaire: number;
 };
 
-const PROG_BASE = `/api/v1/programmations`;
+const PROG_BASE = `https://gestionprojet-api.onrender.com/api/v1/programmations`;
 
 async function apiProg<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(path, {
