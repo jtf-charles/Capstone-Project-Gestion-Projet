@@ -20,7 +20,7 @@ python-dotenv = "*"
 waitress = "*"
 passlib"==1.7.4"
 bcrypt"==3.2.2"
-python-jose = {extras = ["cryptography"], version = "*"}
+python-jose = {version = "==3.3.0", extras = ["cryptography"]}
 [dev-packages]
 
 [requires]
