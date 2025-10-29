@@ -1,5 +1,4 @@
 
-import React from "react";
 import type { Scope } from "../api";
 
 export default function ScopeSelect({

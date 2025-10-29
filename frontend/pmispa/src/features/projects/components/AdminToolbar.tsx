@@ -1,5 +1,4 @@
 // src/features/admin/components/AdminToolbar.tsx
-import React from "react";
 
 export default function AdminToolbar({
   disabled,

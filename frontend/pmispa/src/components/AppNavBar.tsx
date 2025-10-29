@@ -13,7 +13,7 @@ export function AppNavBar() {
   return (
     <header className="sticky top-0 z-50 bg-slate-900/95 text-slate-100 backdrop-blur supports-[backdrop-filter]:bg-slate-900/80 border-b border-slate-800">
       <div className="max-w-7xl mx-auto h-14 px-4 flex items-center gap-4">
-        <div className="font-semibold tracking-wide text-white">MARNDR || DIA</div>
+        <div className="font-semibold tracking-wide text-white">GestionProjet || HAITI</div>
 
         {user && (
           <nav className="flex items-center gap-1">
@@ -22,6 +22,9 @@ export function AppNavBar() {
             </NavLink>
             <NavLink to="/projets" className={({ isActive }) => `${link} ${isActive ? active : ""}`}>
               Projets
+            </NavLink>
+            <NavLink to="/evenements" className={({ isActive }) => `${link} ${isActive ? active : ""}`}>
+              Evènements
             </NavLink>
           </nav>
         )}

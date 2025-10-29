@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
 import {
   fetchProjectPersonnelsLite,
@@ -12,8 +12,9 @@ export default function PersonnelsPanel({ projectId }: { projectId: number }) {
   const { token } = useAuth();
 
   const [pers, setPers] = useState<PersonnelLite[]>([]);
-  const [loadingPers, setLoadingPers] = useState(false);
-  const [errPers, setErrPers] = useState<string | null>(null);
+  const [, setLoadingPers] = useState<boolean>(false);          // ignore la valeur
+  const [, setErrPers] = useState<string | null>(null);
+  
 
   const [selectedPersonnelId, setSelectedPersonnelId] = useState<number | null>(null);
   const selectedPersonnel = useMemo(
@@ -34,7 +35,7 @@ export default function PersonnelsPanel({ projectId }: { projectId: number }) {
       try {
         setErrPers(null);
         setLoadingPers(true);
-        const rows = await fetchProjectPersonnelsLite(projectId, token);
+        const rows = await fetchProjectPersonnelsLite(projectId, token??undefined);
 
         if (cancel) return;
 
@@ -69,7 +70,7 @@ export default function PersonnelsPanel({ projectId }: { projectId: number }) {
       try {
         setErrEvts(null);
         setLoadingEvts(true);
-        const rows = await fetchPersonnelEvenements(selectedPersonnelId, token);
+        const rows = await fetchPersonnelEvenements(selectedPersonnelId, token?? undefined);
         if (!cancel) setEvts(rows || []);
       } catch (e: any) {
         if (!cancel) setErrEvts(e?.message || "Erreur de chargement des événements");

@@ -1,5 +1,5 @@
 // src/features/events/components/SoumissionnairesPanel.tsx
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
 import {
   fetchProjectSoumissionnairesLite, type SoumLite,
@@ -12,8 +12,8 @@ export default function SoumissionnairesPanel({ projectId }: { projectId: number
 
   // Liste pour le select
   const [soums, setSoums] = useState<SoumLite[]>([]);
-  const [loadingSoums, setLoadingSoums] = useState(false);
-  const [errSoums, setErrSoums] = useState<string | null>(null);
+  const [, setLoadingSoums] = useState<boolean>(false);
+  const [, setErrSoums] = useState<string | null>(null);
 
   // Sélection
   const [selectedSoumId, setSelectedSoumId] = useState<number | null>(null);
@@ -37,7 +37,7 @@ export default function SoumissionnairesPanel({ projectId }: { projectId: number
       try {
         setErrSoums(null);
         setLoadingSoums(true);
-        const rows = await fetchProjectSoumissionnairesLite(projectId, token);
+        const rows = await fetchProjectSoumissionnairesLite(projectId, token??undefined);
         if (!cancel) {
           setSoums(rows || []);
           if (!selectedSoumId && rows?.length) {
@@ -64,7 +64,7 @@ export default function SoumissionnairesPanel({ projectId }: { projectId: number
       try {
         setErrEvts(null);
         setLoadingEvts(true);
-        const rows = await fetchSoumissionnaireEvenements(selectedSoumId, token);
+        const rows = await fetchSoumissionnaireEvenements(selectedSoumId, token??undefined);
         if (!cancel) setEvts(rows || []);
       } catch (e: any) {
         if (!cancel) setErrEvts(e?.message || "Erreur de chargement des événements");

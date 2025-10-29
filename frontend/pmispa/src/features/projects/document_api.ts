@@ -71,7 +71,6 @@ export function deleteDocument(
 
 /* ---------------- REST (CRUD) ---------------- */
 // NOTE: "Document" (D majuscule) d'après Swagger
-const DOC_BASE = `${API_BASE}/api/v1/Document`;
 const DOC_load = `${API_BASE}/api/v1/storage`;
 
 

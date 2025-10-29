@@ -129,7 +129,7 @@ export default function ProjectDetailPage() {
       try {
         setErr(null);
         setLoading(true);
-        const p = await fetchProject(projectId, token);
+        const p = await fetchProject(projectId, token?? undefined);
         if (!cancel) setProj(p);
       } catch (e: any) {
         if (!cancel) setErr(e?.message || "Erreur de chargement");
@@ -148,7 +148,7 @@ export default function ProjectDetailPage() {
       try {
         setErr(null);
         setLoading(true);
-        const d = await listProjectDepartements(projectId, token);
+        const d = await listProjectDepartements(projectId, token?? undefined);
         if (!cancel) setDeps(d);
       } catch (e: any) {
         if (!cancel) setErr(e?.message || "Erreur de chargement des départements");
@@ -167,7 +167,7 @@ export default function ProjectDetailPage() {
       try {
         setErr(null);
         setLoading(true);
-        const a = await fetchProjectActivites(projectId, token);
+        const a = await fetchProjectActivites(projectId, token?? undefined);
         if (!cancel) setActs(a);
       } catch (e: any) {
         if (!cancel) setErr(e?.message || "Erreur de chargement des activités");
@@ -186,8 +186,9 @@ export default function ProjectDetailPage() {
       try {
         setZoneErr(null);
         setZoneLoading(true);
-        const rows = await fetchActiviteImplantations(activeAct.idactivite, token);
-        if (!cancel) setZoneRows(rows || []);
+        const rows = await fetchActiviteImplantations(activeAct.idactivite, token?? undefined);
+        if (!cancel) setZoneRows((rows as unknown as { idsite: number; site: string; departement: string }[]) || []);
+;
       } catch (e: any) {
         if (!cancel) setZoneErr(e?.message || "Erreur de chargement");
       } finally {
@@ -205,7 +206,7 @@ export default function ProjectDetailPage() {
       try {
         setSuiviErr(null);
         setSuiviLoading(true);
-        const rows = await fetchActiviteSuivi(activeAct.idactivite, token);
+        const rows = await fetchActiviteSuivi(activeAct.idactivite, token?? undefined);
         if (!cancel) setSuiviRows(rows || []);
       } catch (e: any) {
         if (!cancel) setSuiviErr(e?.message || "Erreur de chargement");
@@ -224,7 +225,7 @@ export default function ProjectDetailPage() {
       try {
         setRespErr(null);
         setRespLoading(true);
-        const rows = await fetchActiviteResponsables(activeAct.idactivite, token);
+        const rows = await fetchActiviteResponsables(activeAct.idactivite, token?? undefined);
         if (!cancel) setRespRows(rows || []);
       } catch (e: any) {
         if (!cancel) setRespErr(e?.message || "Erreur de chargement");
@@ -243,7 +244,7 @@ export default function ProjectDetailPage() {
       try {
         setExeErr(null);
         setExeLoading(true);
-        const rows = await fetchActiviteExercices(activeAct.idactivite, token);
+        const rows = await fetchActiviteExercices(activeAct.idactivite, token?? undefined);
         if (!cancel) setExeRows(rows || []);
       } catch (e: any) {
         if (!cancel) setExeErr(e?.message || "Erreur de chargement");
@@ -262,7 +263,7 @@ export default function ProjectDetailPage() {
       try {
         setPersErr(null);
         setPersLoading(true);
-        const rows = await fetchProjectPersonnels(projectId, token);
+        const rows = token ? await fetchProjectPersonnels(projectId, token) : [];
         if (!cancel) setPersRows(rows || []);
       } catch (e: any) {
         if (!cancel) setPersErr(e?.message || "Erreur de chargement des personnels");
@@ -281,7 +282,7 @@ export default function ProjectDetailPage() {
       try {
         setCmdErr(null);
         setCmdLoading(true);
-        const rows = await fetchProjectCommandes(projectId, token);
+        const rows = await fetchProjectCommandes(projectId, token?? undefined);
         if (!cancel) setCmdRows(rows || []);
       } catch (e: any) {
         if (!cancel) setCmdErr(e?.message || "Erreur de chargement des commandes");
@@ -307,7 +308,7 @@ export default function ProjectDetailPage() {
           (current as any).idcommande ??
           (current as any)["id_commande"] ??
           (current as any)["id"];
-        const rows = await fetchCommandeSoumissionnaires(Number(id), token);
+        const rows = await fetchCommandeSoumissionnaires(Number(id), token?? undefined);
         if (!cancel) setSoumRows(rows || []);
       } catch (e: any) {
         if (!cancel) setSoumErr(e?.message || "Erreur de chargement des soumissionnaires");
@@ -334,7 +335,7 @@ export default function ProjectDetailPage() {
           (current as any).idcommande ??
           (current as any)["id_commande"] ??
           (current as any)["id"];
-        const rows = await fetchCommandeTitulaires(Number(id), token);
+        const rows = await fetchCommandeTitulaires(Number(id), token?? undefined);
         if (!cancel) setTitRows(rows || []);
       } catch (e: any) {
         if (!cancel) setTitErr(e?.message || "Erreur de chargement des titulaires");

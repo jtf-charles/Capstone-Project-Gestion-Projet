@@ -1,5 +1,5 @@
 // src/features/projects/components/TransactionsPanel.tsx
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
 import {
   fetchProjectTransactions,
@@ -25,8 +25,8 @@ export default function TransactionsPanel({ projectId }: { projectId: number }) 
   // scope + liste transactions
   const [scope, setScope] = useState<Scope>("personnel");
   const [txs, setTxs] = useState<TransactionRow[]>([]);
-  const [loadingTxs, setLoadingTxs] = useState(false);
-  const [errTxs, setErrTxs] = useState<string | null>(null);
+  const [, setLoadingTxs] = useState<boolean>(false);
+  const [, setErrTxs] = useState<string | null>(null);
 
   // sélection
   const [selectedTxId, setSelectedTxId] = useState<number | null>(null);

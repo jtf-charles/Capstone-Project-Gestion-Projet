@@ -1,5 +1,4 @@
 // src/features/projects/components/ProjectFilters.tsx
-import React from "react";
 
 type Props = {
   q: string;

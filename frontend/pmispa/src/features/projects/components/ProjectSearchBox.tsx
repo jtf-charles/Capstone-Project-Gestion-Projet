@@ -1,5 +1,5 @@
 // src/features/transactions/components/ProjectSearchBox.tsx
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { fetchProjectsQuick, type QuickProject } from "../api";
 import { useAuth } from "../../auth/AuthContext";
 
@@ -19,7 +19,7 @@ export default function ProjectSearchBox({ value, onChange, placeholder }: Props
     let cancel = false;
     (async () => {
       try {
-        const rows = await fetchProjectsQuick(token);
+        const rows = await fetchProjectsQuick(token??undefined);
         if (!cancel) setAll(Array.isArray(rows) ? rows : []);
       } catch {
         if (!cancel) setAll([]);

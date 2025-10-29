@@ -16,7 +16,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const LS_TOKEN = "pmispa.token";
 const LS_USER  = "pmispa.user";
-const API_BASE = import.meta.env.VITE_API_BASE ?? "https://gestionprojet-api.onrender.com";
+const API_BASE = import.meta.env.VITE_API_BASE ?? "http://127.0.0.1:8000";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   // ✅ hydratation synchrone (pas de flash /login)

@@ -1,5 +1,5 @@
 // src/features/events/components/ActivitiesPanel.tsx
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
 import { fetchProjectActivites, type Activity } from "../api";
 import { fetchActiviteEvenements, type EventRow } from "../api";
@@ -12,8 +12,8 @@ export default function ActivitiesPanel({ projectId }: { projectId: number }) {
 
   // liste d’activités pour le select
   const [acts, setActs] = useState<Activity[]>([]);
-  const [loadingActs, setLoadingActs] = useState(false);
-  const [errActs, setErrActs] = useState<string | null>(null);
+  const [,setLoadingActs] = useState(false);
+  const [, setErrActs] = useState<string | null>(null);
 
   // activité choisie
   const [selectedActId, setSelectedActId] = useState<number | null>(null);
@@ -36,7 +36,7 @@ export default function ActivitiesPanel({ projectId }: { projectId: number }) {
       try {
         setErrActs(null);
         setLoadingActs(true);
-        const rows = await fetchProjectActivites(projectId, token);
+        const rows = await fetchProjectActivites(projectId, token?? undefined);
         if (!cancel) {
           setActs(rows || []);
           if (!selectedActId && rows?.length) {
@@ -62,7 +62,7 @@ export default function ActivitiesPanel({ projectId }: { projectId: number }) {
       try {
         setErrEvts(null);
         setLoadingEvts(true);
-        const rows = await fetchActiviteEvenements(selectedActId, token);
+       const rows = await fetchActiviteEvenements(selectedActId, token ?? undefined);
         if (!cancel) setEvts(rows || []);
       } catch (e: any) {
         if (!cancel) setErrEvts(e?.message || "Erreur de chargement des événements");

@@ -1,5 +1,5 @@
 // src/features/transactions/components/ProjectPicker.tsx
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
 import { fetchProjectsLite, type ProjectLite1 } from "../api";
 
@@ -26,7 +26,7 @@ export default function ProjectPicker({
       try {
         setErr(null);
         setLoading(true);
-        const rows = await fetchProjectsLite(token);
+        const rows = await fetchProjectsLite(token?? undefined);
         if (!cancel) setItems(rows || []);
       } catch (e: any) {
         if (!cancel) setErr(e?.message || "Erreur de chargement des projets");

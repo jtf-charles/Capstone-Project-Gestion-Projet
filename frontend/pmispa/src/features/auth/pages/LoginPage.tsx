@@ -54,8 +54,8 @@ export default function LoginPage() {
             {/* Logos */}
             <div className="flex items-center gap-6">
               <img
-                src="/logos/marndr.jpg"
-                alt="Logo MARNDR"
+                src="/logos/haitiDrapo.png"
+                alt="Logo HAITI"
                 className="w-28 h-28 object-contain rounded-md bg-white/90 p-1 shadow-md"
               />
               <img
@@ -76,7 +76,7 @@ export default function LoginPage() {
               </h2>
               <br></br>
               <h2 className="text-lg font-semibold leading-snug">
-                Capstone project : Bootcamp software engineering AKADEMI
+                Capstone project : Bootcamp Software Engineering AKADEMI
               </h2>
                <br></br>
               <p className="text-sm text-white/80 mt-2">

@@ -1,5 +1,5 @@
 // src/features/projects/pages/ProjectsPage.tsx
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
 import { ProjectFilters } from "../components/ProjectFilters";
 import { ProjectTable } from "../components/ProjectTable";
@@ -9,7 +9,8 @@ import type { Project } from "../api";
 const PAGE_SIZE = 10;
 
 export default function ProjectsPage() {
-  const { token, role } = useAuth();
+  const { token, user } = useAuth();
+  const role = user?.role ?? "regular";
   const canCreate = role === "admin";
 
   const [q, setQ] = useState("");
@@ -40,7 +41,7 @@ export default function ProjectsPage() {
             year: query.year,
             page,
             limit: PAGE_SIZE,
-            status: status || undefined,
+            status: (status === "en_cours" || status === "cloture" ? status : undefined),
           },
           token
         );
@@ -91,8 +92,8 @@ export default function ProjectsPage() {
 
       <ProjectTable
         items={items}
-        canCreate={canCreate}
-        onCreate={() => alert("Création projet (prochaine étape) !")}
+        {...({ canCreate, onCreate: () => alert("Création projet (prochaine étape) !") } as any)}
+        
       />
 
       <div className="flex items-center gap-2 justify-end">

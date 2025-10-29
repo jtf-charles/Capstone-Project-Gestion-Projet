@@ -286,7 +286,7 @@ export type Evenement = AnyRecord;
 async function tryFetch<T>(url: string, token?: string): Promise<T | null> {
   try {
     const data = await apiFetch<T>(url, { token });
-    // @ts-expect-error vérification simple
+    
     if (Array.isArray(data) && data.length === 0) return null;
     return data;
   } catch {
@@ -586,9 +586,13 @@ export type ActiviteTransactionRow = BaseTransactionRow & {
 export type Scope = "personnel" | "activite";
 export type TransactionRow = PersonnelTransactionRow | ActiviteTransactionRow;
 
-function authHeaders(token?: string) {
-  return token ? { Authorization: `Bearer ${token}` } : {};
+// src/features/auth/api.ts (ou l’endroit où est définie authHeaders)
+export function authHeaders(token?: string): Record<string, string> {
+  const h: Record<string, string> = { 'Content-Type': 'application/json' };
+  if (token) h.Authorization = `Bearer ${token}`;
+  return h;
 }
+
 
 // (inchangé) si tu as déjà cette fonction ailleurs
 export type ProjectLite1 = { idprojet: number; code_projet: string; intitule_projet?: string | null };

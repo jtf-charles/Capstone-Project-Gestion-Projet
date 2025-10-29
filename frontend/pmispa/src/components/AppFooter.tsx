@@ -14,7 +14,7 @@ export function AppFooter() {
             className="font-semibold text-slate-800 hover:text-green-700 transition"
             title="Voir le profil"
           >
-            Charles Joseph Tancrede Fils
+            Charles Joseph Tancrede Fils & Gédéon Freycinet
           </a>
         </span>
       </div>

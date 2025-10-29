@@ -1,19 +1,20 @@
 // src/features/events/components/CommandesPanel.tsx
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "../../auth/AuthContext";
 import {
   fetchProjectCommandesLite, type CommandeLite,
   fetchCommandeEvenements, type EventRow
 } from "../api";
 import EventDocsModal from "../components/EventDocsModal";
+import { undefined } from "zod";
 
 export default function CommandesPanel({ projectId }: { projectId: number }) {
   const { token } = useAuth();
 
   // liste des commandes
   const [cmds, setCmds] = useState<CommandeLite[]>([]);
-  const [loadingCmds, setLoadingCmds] = useState(false);
-  const [errCmds, setErrCmds] = useState<string | null>(null);
+  const [, setLoadingCmds] = useState(false);
+  const [, setErrCmds] = useState<string | null>(null);
 
   // commande choisie
   const [selectedCmdId, setSelectedCmdId] = useState<number | null>(null);
@@ -37,7 +38,8 @@ export default function CommandesPanel({ projectId }: { projectId: number }) {
       try {
         setErrCmds(null);
         setLoadingCmds(true);
-        const rows = await fetchProjectCommandesLite(projectId, token);
+        const safeToken: string | undefined = token ?? (void 0);
+        const rows = await fetchProjectCommandesLite(projectId, safeToken);
         if (!cancel) {
           setCmds(rows || []);
           if (!selectedCmdId && rows?.length) {
@@ -64,7 +66,8 @@ export default function CommandesPanel({ projectId }: { projectId: number }) {
       try {
         setErrEvts(null);
         setLoadingEvts(true);
-        const rows = await fetchCommandeEvenements(selectedCmdId, token);
+        const rows = await fetchCommandeEvenements(selectedCmdId, (token ?? undefined) as string | undefined);
+
         if (!cancel) setEvts(rows || []);
       } catch (e: any) {
         if (!cancel) setErrEvts(e?.message || "Erreur de chargement des événements");

@@ -43,7 +43,7 @@ export default function EventDocsModal({
       try {
         setErr(null);
         setLoading(true);
-        const rows = await fetchEventDocuments(idevenement, token);
+        const rows = await fetchEventDocuments(idevenement, token?? undefined);
         if (!cancel) setDocs(rows || []);
       } catch (e: any) {
         if (!cancel) setErr(e?.message || "Erreur de chargement des documents");

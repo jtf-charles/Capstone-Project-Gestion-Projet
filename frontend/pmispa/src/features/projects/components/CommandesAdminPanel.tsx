@@ -15,12 +15,7 @@ import { btnSave, btnEdit, btnDelete, btnGhost } from "../../../ui/tokens";
 import { ConfirmDialog } from "../../../ui/dialogs";
 import { Toast, useToast } from "../../../ui/Toast";
 
-// helpers
-function toNumberOrNull(v: any): number | null {
-  if (v === "" || v === null || v === undefined) return null;
-  const n = Number(v);
-  return Number.isFinite(n) ? n : null;
-}
+
 function toNumberRequired(v: any): number {
   const n = Number(v);
   if (!Number.isFinite(n)) return NaN as any;

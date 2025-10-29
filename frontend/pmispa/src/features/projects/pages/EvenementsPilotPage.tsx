@@ -44,7 +44,7 @@ export default function EvenementsPilotPage() {
       try {
         setErr(null);
         setLoadingList(true);
-        const rows = await listProjectsLite(token);
+        const rows = await listProjectsLite(token as string);
         if (!cancel) setAllProjects(rows || []);
       } catch (e: any) {
         if (!cancel) setErr(e?.message || "Erreur de chargement des projets");
