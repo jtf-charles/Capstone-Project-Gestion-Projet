@@ -1,0 +1,17 @@
+Flask
+gunicorn
+Flask-SQLAlchemy
+Flask-Migrate
+Flask-JWT-Extended
+flasgger
+alembic>=1.13.2
+Flask-Cors
+SQLAlchemy
+PyMySQL
+pydantic
+pydantic-settings
+python-dotenv
+waitress
+passlib==1.7.4
+bcrypt==3.2.2
+python-jose[cryptography]
