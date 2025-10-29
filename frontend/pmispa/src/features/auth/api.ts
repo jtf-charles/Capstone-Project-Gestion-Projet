@@ -5,8 +5,8 @@ export async function loginApi(
   params: { username: string; password: string; expectRole: Role }
 ) {
   const { username, password, expectRole } = params;
-
-  const res = await fetch(`/api/v1/auth/login`, {            // ⬅️ note: pas de baseUrl
+  const BASE = import.meta.env.VITE_API_URL;
+  const res = await fetch(`${BASE}/auth/login`, {            // ⬅️ note: pas de baseUrl
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },
     body: JSON.stringify({
