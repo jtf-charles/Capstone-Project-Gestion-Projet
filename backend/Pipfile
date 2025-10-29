@@ -18,8 +18,8 @@ pydantic = "*"
 pydantic-settings = "*"
 python-dotenv = "*"
 waitress = "*"
-bcrypt= ">=3.2.2"
-passlib = {extras = ["bcrypt"], version = "*"}
+passlib"==1.7.4"
+bcrypt"==3.2.2"
 python-jose = {extras = ["cryptography"], version = "*"}
 [dev-packages]
 
