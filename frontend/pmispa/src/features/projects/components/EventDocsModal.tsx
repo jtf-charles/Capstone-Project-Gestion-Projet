@@ -3,7 +3,7 @@ import React from "react";
 import { useAuth } from "../../auth/AuthContext";
 import { fetchEventDocuments, type DocRow } from "../api";
 
-const API_BASE = import.meta.env.VITE_API_BASE ?? "";
+const API_BASE ="https://gestionprojet-api.onrender.com";
 
 function getExtFromPath(path?: string | null) {
   if (!path) return "";
@@ -57,13 +57,13 @@ export default function EventDocsModal({
   }, [open, idevenement, token]);
 
   const handleOpen = (id: number) => {
-    const url = `${API_BASE}/api/v1/documents/${id}/open`;
+    const url = `${API_BASE}/api/v1/document/${id}/open`;
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const handleDownload = async (doc: DocRow) => {
     try {
-      const url = `${API_BASE}/api/v1/documents/${doc.iddocument}/download`;
+      const url = `${API_BASE}/api/v1/document/${doc.iddocument}/download`;
       const res = await fetch(url, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
