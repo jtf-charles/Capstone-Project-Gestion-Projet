@@ -78,12 +78,12 @@ export default function TransactionsPage() {
       try {
         setErr(null);
         setLoading(true);
-        const r = await fetch(`https://gestionprojet-api.onrender.com/api/v1/transactions/projets/${projectId}/transactions?scope=${scope}`, {
-  headers: {
-    Accept: 'application/json',
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
-  },
-  credentials: 'include',
+        const r = await fetch(`/api/v1/transactions/projets/${projectId}/transactions?scope=${scope}`, {
+          headers: {
+            Accept: 'application/json',
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          },
+          credentials: 'include',
 });
 const data = await asJson<Tx[]>(r);
 
@@ -139,7 +139,7 @@ const data = await asJson<Tx[]>(r);
 
     setEventsCache(prev => ({ ...prev, [txId]: { loading: true, error: null, items: [] } }));
     try {
-      const url = `https://gestionprojet-api.onrender.com/api/v1/transactions/${txId}/evenements`;
+      const url = `/api/v1/transactions/${txId}/evenements`;
       const res = await fetch(url, {
   headers: {
     Accept: 'application/json',

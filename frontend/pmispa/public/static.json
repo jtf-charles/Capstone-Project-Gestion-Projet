@@ -1,0 +1,7 @@
+{
+  "routes": [
+    { "src": "^/api/v1/(.*)$", "dest": "https://gestionprojet-api.onrender.com/api/v1/$1" },
+    { "src": "^/media/(.*)$",  "dest": "https://gestionprojet-api.onrender.com/media/$1" },
+    { "src": ".*",             "dest": "/index.html" }
+  ]
+}
