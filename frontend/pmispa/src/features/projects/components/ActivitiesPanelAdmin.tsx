@@ -4,7 +4,7 @@ import { btnDelete, btnEdit, btnGhost, btnSave } from "../../../ui/tokens";
 import { ConfirmDialog } from "../../../ui/dialogs";
 import { Toast, useToast } from "../../../ui/Toast";
 
-const API_BASE = import.meta.env.VITE_API_BASE ?? "";
+const API_BASE = "https://gestionprojet-api.onrender.com";
 const ACTIVITIES_URL = `${API_BASE}/api/v1/activites/`; // backend FR
 const PROJECTS_URL   = `${API_BASE}/api/v1/projets/`;
 

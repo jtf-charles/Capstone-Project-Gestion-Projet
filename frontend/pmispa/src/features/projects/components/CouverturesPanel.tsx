@@ -5,7 +5,7 @@ import { btnDelete, btnEdit, btnGhost, btnSave } from "../../../ui/tokens";
 import { ConfirmDialog } from "../../../ui/dialogs";
 import { Toast, useToast } from "../../../ui/Toast";
 
-const API_BASE = import.meta.env.VITE_API_BASE ?? "";
+const API_BASE = "https://gestionprojet-api.onrender.com";
 
 /* --- types souples (accepte departement | nom_departement) --- */
 type Departement = { iddepartement: number; departement?: string; nom_departement?: string };

@@ -12,7 +12,7 @@ type SiteRow = {
   localite: string;
 };
 
-const API_BASE = import.meta.env.VITE_API_BASE ?? "";
+const API_BASE = "https://gestionprojet-api.onrender.com";
 
 // --- petite aide pour la comparaison insensible à la casse (et espaces) ---
 const norm = (s: string) => s.trim().toLowerCase();

@@ -136,8 +136,7 @@ export default function HomePage() {
             initial="hidden"
             animate="show"
           >
-            République d’Haïti · Ministère de l’Agriculture, des Ressources
-            Naturelles et du Développement Rural
+            République d’Haïti · Système de gestion des projets de l'administration publique
           </motion.p>
 
           {/* logos */}
@@ -149,8 +148,8 @@ export default function HomePage() {
             animate="show"
           >
             <motion.img
-              src="/logos/marndr.jpg"
-              alt="MARNDR"
+              src="/logos/haitiDrapo.png"
+              alt="haiti"
               className="w-20 h-20 md:w-24 md:h-24 rounded-xl bg-white/90 p-1 shadow-lg"
               initial={{ y: 0 }}
               animate={{ y: [0, -4, 0] }}
@@ -175,11 +174,10 @@ export default function HomePage() {
             animate="show"
           >
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold mt-1 leading-tight">
-              Direction des infrastructures agricoles
+              L'état central
             </h1>
             <p className="text-white/80 mt-2">
-              Bienvenue{user?.username ? `, ${user.username}` : ""} — rôle{" "}
-              <span className="font-semibold">{role}</span>. Cette plateforme
+              Bienvenue{user?.username ? `, ${user.username}` : ""}. Cette plateforme
               centralise les projets, le suivi et la documentation pour un
               pilotage fiable et efficace.
             </p>
@@ -326,7 +324,7 @@ export default function HomePage() {
           </div>
           <h3 className="text-lg font-semibold text-slate-900">Besoin d’aide ?</h3>
           <p className="text-slate-700 mt-1">
-            Pour toute question ou demande d’accès, contactez l’équipe DIA / MARNDR.
+            Pour toute question ou demande d’accès, contactez nous.
             Vous pouvez commencer par la section{" "}
             <Link to="/projets" className="text-green-700 font-medium">Projets</Link>.
           </p>

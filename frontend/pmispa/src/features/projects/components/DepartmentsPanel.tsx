@@ -11,7 +11,7 @@ type Departement = {
   departement?: string | null;     // ⟵ …et parfois celui-ci
 };
 
-const API_BASE = import.meta.env.VITE_API_BASE ?? "";
+const API_BASE = "https://gestionprojet-api.onrender.com";
 
 // helpers d’affichage/filtrage sûrs
 function norm(s: unknown): string {

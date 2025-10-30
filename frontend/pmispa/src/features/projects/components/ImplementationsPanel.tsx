@@ -16,7 +16,7 @@ type Site = {
 type Activite = { idactivite: number; titre_act: string };
 type Implantation = { idimplementation: number; idsite: number | null; idactivite: number | null };
 
-const API_BASE = import.meta.env.VITE_API_BASE ?? "";
+const API_BASE ="https://gestionprojet-api.onrender.com";
 
 /* ---------- Dialog d’édition ---------- */
 function EditImplDialog(props: {
