@@ -35,6 +35,23 @@ function fmtDate(s?: string | null) {
   try { return new Date(s).toLocaleDateString(); } catch { return s; }
 }
 
+// Garantit qu'on a bien du JSON, sinon renvoie une erreur lisible
+function asJson<T>(res: Response): Promise<T> {
+  if (!res.ok) {
+    return res.text().catch(() => '').then((t) => {
+      throw new Error(t || `HTTP ${res.status}`);
+    });
+  }
+  const ct = res.headers.get('content-type') || '';
+  if (!ct.includes('application/json')) {
+    return res.text().catch(() => '').then((t) => {
+      throw new Error(`Réponse non-JSON (${ct || 'inconnue'}). Début: ${t.slice(0, 80)}`);
+    });
+  }
+  return res.json() as Promise<T>;
+}
+
+
 export default function TransactionsPage() {
   const { token } = useAuth();
   const [projectId, setProjectId] = useState<number | null>(null);
@@ -61,11 +78,15 @@ export default function TransactionsPage() {
       try {
         setErr(null);
         setLoading(true);
-        const r = await fetch(`/api/v1/transactions/projets/${projectId}/transactions?scope=${scope}`, {
-          headers: token ? { Authorization: `Bearer ${token}` } : {},
-        });
-        if (!r.ok) throw new Error("Erreur de chargement");
-        const data: Tx[] = await r.json();
+        const r = await fetch(`https://gestionprojet-api.onrender.com/api/v1/transactions/projets/${projectId}/transactions?scope=${scope}`, {
+  headers: {
+    Accept: 'application/json',
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  },
+  credentials: 'include',
+});
+const data = await asJson<Tx[]>(r);
+
         if (!cancel) {
           setRows(Array.isArray(data) ? data : []);
           setExpanded(new Set());
@@ -118,13 +139,16 @@ export default function TransactionsPage() {
 
     setEventsCache(prev => ({ ...prev, [txId]: { loading: true, error: null, items: [] } }));
     try {
-      const url = `/api/v1/transactions/${txId}/evenements`;
-      const res = await fetch(url, { headers: token ? { Authorization: `Bearer ${token}` } : {} });
-      if (!res.ok) {
-        const t = await res.text().catch(() => "");
-        throw new Error(t || `HTTP ${res.status}`);
-      }
-      const items: EventRow[] = await res.json();
+      const url = `https://gestionprojet-api.onrender.com/api/v1/transactions/${txId}/evenements`;
+      const res = await fetch(url, {
+  headers: {
+    Accept: 'application/json',
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  },
+  credentials: 'include',
+});
+const items = await asJson<EventRow[]>(res);
+
       setEventsCache(prev => ({ ...prev, [txId]: { loading: false, error: null, items: items || [] } }));
     } catch (e: any) {
       setEventsCache(prev => ({ ...prev, [txId]: { loading: false, error: e?.message || "Erreur", items: [] } }));

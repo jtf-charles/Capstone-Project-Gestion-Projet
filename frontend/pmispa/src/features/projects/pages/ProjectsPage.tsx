@@ -41,7 +41,7 @@ export default function ProjectsPage() {
             year: query.year,
             page,
             limit: PAGE_SIZE,
-            status: (status === "en_cours" || status === "cloture" ? status : undefined),
+            status: status,
           },
           token
         );
