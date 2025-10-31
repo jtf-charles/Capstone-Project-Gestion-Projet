@@ -12,7 +12,7 @@ export async function loginApi(
     body: JSON.stringify({
       username,
       password,
-      expect_role: expectRole,                               // snake_case attendu par FastAPI
+      expect_role: expectRole,                               
     }),
   });
 
