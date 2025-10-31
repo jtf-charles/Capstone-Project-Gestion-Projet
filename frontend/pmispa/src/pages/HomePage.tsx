@@ -174,7 +174,7 @@ export default function HomePage() {
             animate="show"
           >
             <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold mt-1 leading-tight">
-             ETAT CENTRAL
+             ETAT CENTRAL: Usage gouvernemental
             </h1>
             <p className="text-white/80 mt-2">
               Bienvenue{user?.username ? `, ${user.username}` : ""}. Cette plateforme
