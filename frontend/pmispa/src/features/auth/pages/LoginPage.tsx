@@ -54,7 +54,7 @@ export default function LoginPage() {
             {/* Logos */}
             <div className="flex items-center gap-6">
               <img
-                src="/logos/haitiDrapo.png"
+                src="/logos/marndr.jpg"
                 alt="Logo HAITI"
                 className="w-28 h-28 object-contain rounded-md bg-white/90 p-1 shadow-md"
               />
@@ -72,22 +72,28 @@ export default function LoginPage() {
               </h2>
                 <br></br>
               <h2 className="text-lg font-semibold leading-snug">
-                Système de gestion des projets de l'administration publique
+                Ministère de l'Agriculture, des Ressources Naturelles et du Développement Rural
               </h2>
               <br></br>
               <h2 className="text-lg font-semibold leading-snug">
-                Capstone project : Bootcamp Software Engineering AKADEMI
+                Direction des infrastructures agricoles
               </h2>
                <br></br>
+               <p className="text-sm text-white/80 mt-2">
+                Platforme de gestion des projets à financement interne
+              </p>
+               <p className="text-sm text-white/80 mt-2">
+                Usage institutionnel
+              </p>
               <p className="text-sm text-white/80 mt-2">
-                Développé par: <br/><br/> Charles J. Tancrède Fils<br/><br/>Gédéon Freycinet
+                Développé par: Charles J. Tancrède Fils
               </p>
             </div>
           </div>
 
           {/* bas de panneau */}
           <div className="relative z-10 mt-8 text-xs text-white/70">
-            © {new Date().getFullYear()}— République d’Haïti
+            © {new Date().getFullYear()}  MARNDR-République d’Haïti
           </div>
         </aside>
 
