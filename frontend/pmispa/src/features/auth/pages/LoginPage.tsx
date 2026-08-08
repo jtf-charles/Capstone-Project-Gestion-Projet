@@ -85,14 +85,15 @@ export default function LoginPage() {
                <p className="text-sm text-white/80 mt-2">
                 Usage institutionnel
               </p>
-              <p className="text-sm text-white/80 mt-2">
+        
+              <p className="text-sm text-white/80 mt-6">
                 Développé par: Charles J. Tancrède Fils
               </p>
             </div>
           </div>
 
           {/* bas de panneau */}
-          <div className="relative z-10 mt-8 text-xs text-white/70">
+          <div className="relative z-10 mt-6 text-xs text-white/70">
             © {new Date().getFullYear()}  MARNDR-République d’Haïti
           </div>
         </aside>
